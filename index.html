@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spice Garden POS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="brand">
+        <h1>Spice Garden</h1>
+        <p>Fast counter billing for your favorite South Indian bites</p>
+      </div>
+      <div class="hero-actions">
+        <button id="print-bill-btn" class="ghost-btn">Print Bill</button>
+        <button id="clear-cart-btn" class="ghost-btn">Clear Cart</button>
+        <button id="pay-now-btn" class="primary-btn">Pay Now</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="menu-panel">
+        <div class="section-header">
+          <h2>Menu</h2>
+          <button id="add-menu-item-btn" class="ghost-btn">+ Add Item</button>
+        </div>
+        <div id="menu-grid" class="menu-grid"></div>
+      </section>
+
+      <section class="cart-panel">
+        <h2>Current Bill</h2>
+        <div id="cart-items" class="cart-items empty">
+          <p>No items yet. Tap a dish to add it to the bill.</p>
+        </div>
+        <div class="cart-summary">
+          <div class="line">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0.00</span>
+          </div>
+          <div class="line total">
+            <strong>Total</strong>
+            <strong id="total">₹0.00</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="admin-panel">
+      <div class="admin-card">
+        <h3>Manage Menu</h3>
+        <form id="menu-form">
+          <input type="hidden" id="menu-item-id" />
+          <div class="field">
+            <label for="menu-picker">Existing items</label>
+            <select id="menu-picker">
+              <option value="">New item…</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="menu-name">Name</label>
+            <input id="menu-name" type="text" required />
+          </div>
+          <div class="field">
+            <label for="menu-price">Price (₹)</label>
+            <input id="menu-price" type="number" step="0.01" min="0" required />
+          </div>
+          <div class="field">
+            <label for="menu-description">Description</label>
+            <textarea
+              id="menu-description"
+              rows="2"
+              placeholder="E.g. Crispy dosa with chutney"
+            ></textarea>
+          </div>
+          <div class="field">
+            <label for="menu-image">Image URL</label>
+            <input
+              id="menu-image"
+              type="text"
+              placeholder="https://example.com/dish.jpg"
+              required
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Save</button>
+            <button id="menu-form-cancel" type="button" class="ghost-btn">Cancel</button>
+            <button id="menu-form-delete" type="button" class="danger-btn">Delete</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h3>Monthly Sales</h3>
+        <div id="sales-report" class="sales-report"></div>
+      </div>
+    </section>
+
+    <div id="qr-modal" class="modal hidden">
+      <div class="modal-content">
+        <button id="qr-close-btn" class="ghost-btn close-btn">✕</button>
+        <h3>Scan &amp; Pay</h3>
+        <img src="assets/qr-placeholder.svg" alt="UPI QR Code" />
+        <p>UPI: spicegarden@upi</p>
+      </div>
+    </div>
+
+    <template id="menu-item-template">
+      <article class="menu-card">
+        <img src="" alt="" />
+        <div class="menu-card-body">
+          <div>
+            <h4></h4>
+            <p></p>
+          </div>
+          <span class="price"></span>
+        </div>
+      </article>
+    </template>
+
+    <template id="cart-item-template">
+      <div class="cart-line">
+        <div class="info">
+          <h4></h4>
+          <small></small>
+        </div>
+        <div class="actions">
+          <button class="ghost-btn decrement">-</button>
+          <span class="qty"></span>
+          <button class="ghost-btn increment">+</button>
+          <span class="line-total"></span>
+        </div>
+      </div>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
+
